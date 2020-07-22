@@ -1,3 +1,7 @@
+# A React Modal Using Styled Components
+This is a simple demo of a confirmation box implemented
+in styled-components.
+---------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

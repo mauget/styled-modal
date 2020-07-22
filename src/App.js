@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {ConfirmationBox} from "./styled/ConfirmationBox";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [show, setShow] = useState(false);
+    const strikeName = 'strike one';
+    const showModal = () => {
+        setShow(true);
+    };
+
+    const hideModal = () => {
+        setShow(false);
+    };
+
+    return (
+        <>
+            <div className="App">
+                <p>This is main panel stuff. This is main panel stuff. This
+                    is main panel stuff. This is main panel stuff. This is
+                    main panel stuff. This is main panel stuff. This is main
+                    panel stuff. This is main panel stuff.</p>
+                <button type="button" onClick={showModal}>
+                    Open modal
+                </button>
+            </div>
+            <ConfirmationBox show={show} headerText="Confirm delete strike" handleClose={hideModal}>
+                {`Delete strike "${strikeName}"? This cannot be undone.`}
+            </ConfirmationBox>
+        </>
+    );
 }
 
 export default App;
