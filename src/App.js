@@ -1,22 +1,32 @@
 import React, {useState} from 'react';
 import './App.css';
-import {ConfirmationBox} from "./styled/ConfirmationBox";
+import ConfirmationModal from './styled/ConfirmationModal';
+
+function handleMainClick() {
+    window.alert('Clicked main panel item');
+}
+
+function actOnModalResult(arg){
+    console.warn(`Modal result: ${arg}`);
+}
 
 function App() {
     const [show, setShow] = useState(false);
-    const strikeName = 'strike one';
+    const itemName = 'item one';
     const showModal = () => {
         setShow(true);
     };
 
-    const hideModal = () => {
+    const hideModal = (arg) => {
+        actOnModalResult(arg);
         setShow(false);
     };
 
     return (
         <>
             <div className="App">
-                <p>This is main panel stuff. This is main panel stuff. This
+                <p><span style={{color: 'blue', cursor: 'pointer'}} onClick={handleMainClick}>This</span>
+                    is main panel stuff. This is main panel stuff. This
                     is main panel stuff. This is main panel stuff. This is
                     main panel stuff. This is main panel stuff. This is main
                     panel stuff. This is main panel stuff.</p>
@@ -24,9 +34,9 @@ function App() {
                     Open modal
                 </button>
             </div>
-            <ConfirmationBox show={show} headerText="Confirm delete strike" handleClose={hideModal}>
-                {`Delete strike "${strikeName}"? This cannot be undone.`}
-            </ConfirmationBox>
+            <ConfirmationModal show={show} headerText="Confirm delete item?" handleClose={hideModal}>
+                {`Delete "${itemName}"? This cannot be undone.`}
+            </ConfirmationModal>
         </>
     );
 }
