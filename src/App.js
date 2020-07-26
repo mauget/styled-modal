@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import ConfirmationModal from './styled/ConfirmationModal';
+import * as Pos from  './styled/ConfirmationModal';
 
 function handleMainClick() {
     window.alert('Clicked main panel item');
@@ -38,7 +39,8 @@ function App() {
                     Open modal
                 </button>
             </div>
-            <ConfirmationModal show={show} headerText="Confirm delete item?" handleClose={hideModal}>
+            <ConfirmationModal show={show} headerText="Confirm delete item?"
+                               handleClose={hideModal} openPos={Pos.CM_TOP_CENTER}>
                 {`Permanently delete "${itemName}"?`}
             </ConfirmationModal>
         </>

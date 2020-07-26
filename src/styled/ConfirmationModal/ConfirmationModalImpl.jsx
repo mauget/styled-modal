@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import React from "react";
+import {CM_CENTER_CENTER, CM_TOP_CENTER, CM_TOP_LEFT, CM_TOP_RIGHT} from "./index";
 
-// These styled components are private
+// These are private components
 const Model = styled.div`
     z-index: auto;
     display: ${({show}) => (show ? 'block' : 'none')};
@@ -19,9 +20,31 @@ const Container = styled.div`
     background: skyblue;
     width: 33%;
     height: auto;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    
+    top: ${({openPos}) => (
+    {
+        [CM_CENTER_CENTER]: '50%',
+        [CM_TOP_LEFT]: '10%',
+        [CM_TOP_CENTER]: '10%',
+        [CM_TOP_RIGHT]: '10%'
+    }[openPos])};
+    
+    left: ${({openPos}) => (
+    {
+        [CM_CENTER_CENTER]: '50%',
+        [CM_TOP_LEFT]: '5%',
+        [CM_TOP_CENTER]: '50%',
+        [CM_TOP_RIGHT]: '95%'
+    }[openPos])};
+  
+    transform: ${({openPos}) => (
+    {
+        [CM_CENTER_CENTER]: 'translate(-50%,-50%)',
+        [CM_TOP_LEFT]: 'translate(0,0)',
+        [CM_TOP_CENTER]: 'translate(-50%,0)',
+        [CM_TOP_RIGHT]: 'translate(-100%,0)'
+    }[openPos])};
+
     border-radius: 10px;
     padding: 0.75rem;
     color: rgba(0,0,139, 0.7);
@@ -66,7 +89,8 @@ export default function ConfirmationModalImpl(props) {
         handleClose, // renderProp fn returns true or false
         show, // boolean - visible/invisible
         headerText, // text
-        detailText // html / inner text
+        detailText, // html / inner text
+        openPos // symbol for placement
     } = {...props};
 
     const sendYes = () => handleClose(true);
@@ -75,7 +99,7 @@ export default function ConfirmationModalImpl(props) {
 
     return (
         <Model show={show}>
-            <Container>
+            <Container openPos={openPos}>
                 <Header>{headerText}</Header>
                 <HBar/>
                 <Slot>{detailText}</Slot>
@@ -95,5 +119,6 @@ ConfirmationModalImpl.defaultProps = {
     detailText: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element
-    ]).isRequired
+    ]).isRequired,
+    openPos: PropTypes.symbol
 }
