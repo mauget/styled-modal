@@ -6,8 +6,11 @@ function handleMainClick() {
     window.alert('Clicked main panel item');
 }
 
-function actOnModalResult(arg){
+function actOnModalResult(arg) {
     console.warn(`Modal result: ${arg}`);
+    if (arg){
+        setTimeout(() => alert('Delete action placeholder'), 0);
+    }
 }
 
 function App() {
@@ -18,15 +21,16 @@ function App() {
     };
 
     const hideModal = (arg) => {
-        actOnModalResult(arg);
         setShow(false);
+        actOnModalResult(arg);
     };
 
     return (
         <>
             <div className="App">
-                <p><span style={{color: 'blue', cursor: 'pointer'}} onClick={handleMainClick}>This</span>
-                    is main panel stuff. This is main panel stuff. This
+                <p><span style={{color: 'red', cursor: 'pointer'}}
+                         onClick={handleMainClick}>This is main panel stuff.</span>
+                    This is main panel stuff. This
                     is main panel stuff. This is main panel stuff. This is
                     main panel stuff. This is main panel stuff. This is main
                     panel stuff. This is main panel stuff.</p>
@@ -35,7 +39,7 @@ function App() {
                 </button>
             </div>
             <ConfirmationModal show={show} headerText="Confirm delete item?" handleClose={hideModal}>
-                {`Delete "${itemName}"? This cannot be undone.`}
+                {`Permanently delete "${itemName}"?`}
             </ConfirmationModal>
         </>
     );

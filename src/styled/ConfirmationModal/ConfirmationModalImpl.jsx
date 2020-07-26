@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 import React from "react";
 
-const StyledModel = styled.div`
+// These styled components are private
+const Model = styled.div`
     z-index: auto;
     display: ${({show}) => (show ? 'block' : 'none')};
     position: fixed;
@@ -12,7 +14,7 @@ const StyledModel = styled.div`
     background: rgba(0,0,0,0.5);
 `;
 
-const StyledContainer = styled.div` 
+const Container = styled.div` 
     position:fixed;
     background: skyblue;
     width: 33%;
@@ -20,14 +22,12 @@ const StyledContainer = styled.div`
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    border: solid lightskyblue 2px;
     border-radius: 10px;
     padding: 0.75rem;
     color: rgba(0,0,139, 0.7);
 `;
 
-const StyledButton = styled.button`
-
+const Button = styled.button`
     background-color: ${({primary}) => (primary ? 'orange' : 'lightgray')};
     color: ${({primary}) => (primary ? 'white' : 'black')};
     border: solid 2px #9f7500;
@@ -37,7 +37,7 @@ const StyledButton = styled.button`
     margin: 0.2rem;
 `;
 
-const StyledHeader = styled.div`
+const Header = styled.div`
     font-size: calc(9px + 2vmin);
     color: rgba(0,0,139, 0.7);;
 `;
@@ -46,26 +46,27 @@ const HBar = styled.div`
     width: 100%;
     height: 1px;
     border: solid 1px rgba(80,80,150, 0.4);
+    background-color: rgba(80,80,150, 0.4);
 `;
 
-const StyledButtonBar = styled.div`
+const ButtonBar = styled.div`
     display: flex;
     flex-direction: row;
     flex: 1 0 auto;
-    //align-items: flex-end;
     justify-content: flex-end;
 `;
 
 const Slot = styled.div`
-
+    font-size: medium;
+    color: inherit;
 `;
 
-export default function Modal(props) {
+export default function ConfirmationModalImpl(props) {
     const {
         handleClose, // renderProp fn returns true or false
         show, // boolean - visible/invisible
         headerText, // text
-        children // html / inner text
+        detailText // html / inner text
     } = {...props};
 
     const sendYes = () => handleClose(true);
@@ -73,16 +74,26 @@ export default function Modal(props) {
     const sendNo = () => handleClose(false);
 
     return (
-        <StyledModel show={show}>
-            <StyledContainer>
-                <StyledHeader>{headerText}</StyledHeader>
+        <Model show={show}>
+            <Container>
+                <Header>{headerText}</Header>
                 <HBar/>
-                <Slot>{children}</Slot>
-                <StyledButtonBar>
-                    <StyledButton onClick={sendYes} primary={true}>Yes</StyledButton>
-                    <StyledButton onClick={sendNo} primary={false}>No</StyledButton>
-                </StyledButtonBar>
-            </StyledContainer>
-        </StyledModel>
+                <Slot>{detailText}</Slot>
+                <ButtonBar>
+                    <Button onClick={sendYes} primary={true}>Yes</Button>
+                    <Button onClick={sendNo} primary={false}>No</Button>
+                </ButtonBar>
+            </Container>
+        </Model>
     );
+}
+
+ConfirmationModalImpl.defaultProps = {
+    handleClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    headerText: PropTypes.string.isRequired,
+    detailText: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element
+    ]).isRequired
 }
