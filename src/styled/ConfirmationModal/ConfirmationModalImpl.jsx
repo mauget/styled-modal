@@ -120,5 +120,5 @@ ConfirmationModalImpl.defaultProps = {
         PropTypes.string,
         PropTypes.element
     ]).isRequired,
-    openPos: PropTypes.symbol
+    openPos: PropTypes.symbol.isRequired
 }
