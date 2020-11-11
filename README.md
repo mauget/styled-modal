@@ -1,4 +1,4 @@
-# A React ConfirmationModalImpl Using Styled Components
+# A React Modal Using Styled Components
 This is a simple demo of a confirmation box implemented
 in Styled Components. No modal framework used.
 ---------
