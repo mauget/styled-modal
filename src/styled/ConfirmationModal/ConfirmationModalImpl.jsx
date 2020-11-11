@@ -4,6 +4,8 @@ import React from "react";
 import {CM_CENTER_CENTER, CM_TOP_CENTER, CM_TOP_LEFT, CM_TOP_RIGHT} from "./index";
 
 // These are private components
+
+// Modal background layer - visible or invisible, but always floating above client's elements
 const Model = styled.div`
     z-index: auto;
     display: ${({show}) => (show ? 'block' : 'none')};
@@ -15,9 +17,10 @@ const Model = styled.div`
     background: rgba(0,0,0,0.5);
 `;
 
+// Rendered popup - a positional demo confirmation box
 const Container = styled.div` 
     position:fixed;
-    background: skyblue;
+    background: antiquewhite;
     width: 33%;
     height: auto;
     
@@ -47,12 +50,12 @@ const Container = styled.div`
 
     border-radius: 10px;
     padding: 0.75rem;
-    color: rgba(0,0,139, 0.7);
+    color: rgba(0,0,139, 0.9);
 `;
 
 const Button = styled.button`
-    background-color: ${({primary}) => (primary ? 'orange' : 'lightgray')};
-    color: ${({primary}) => (primary ? 'white' : 'black')};
+    background-color: ${({primary}) => (primary ? 'green' : 'red')};
+    color: ${({primary}) => (primary ? 'white' : 'white')};
     border: solid 2px #9f7500;
     border-radius: 8px;
     width: 5.0rem;
