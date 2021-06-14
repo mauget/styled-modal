@@ -61,10 +61,11 @@ const Button = styled.button`
     width: 5.0rem;
     padding: 0.2rem;
     margin: 0.2rem;
+    font-size: 1rem;
 `;
 
 const Header = styled.div`
-    font-size: calc(9px + 2vmin);
+    font-size: 2.4rem;
     color: rgba(0,0,139, 0.7);;
 `;
 
@@ -83,7 +84,7 @@ const ButtonBar = styled.div`
 `;
 
 const Slot = styled.div`
-    font-size: medium;
+    font-size: 1.6rem;
     color: inherit;
 `;
 
@@ -94,7 +95,7 @@ export default function ConfirmationModalImpl(props) {
         headerText, // text
         detailText, // html / inner text
         openPos // symbol for placement
-    } = {...props};
+    } = { ...props };
 
     const sendYes = () => handleClose(true);
 
@@ -114,14 +115,13 @@ export default function ConfirmationModalImpl(props) {
         </Model>
     );
 }
-
-ConfirmationModalImpl.defaultProps = {
+ConfirmationModalImpl.propTypes = {
     handleClose: PropTypes.func.isRequired,
-    show: PropTypes.bool,
+    show: PropTypes.bool.isRequired,
     headerText: PropTypes.string.isRequired,
     detailText: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element
     ]).isRequired,
     openPos: PropTypes.symbol.isRequired
-}
+};

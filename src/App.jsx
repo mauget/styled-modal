@@ -1,26 +1,58 @@
 import React, {useState} from 'react';
-import './App.css';
-import ConfirmationModal from './styled/ConfirmationModal';
-import * as Pos from  './styled/ConfirmationModal';
+import styled from "styled-components";
+import ConfirmationModal from './ConfirmationModal';
+import * as Pos from './ConfirmationModal';
+import Counter from "./Counter";
 
-function handleMainClick() {
-    window.alert('Clicked main panel item');
-}
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: dimgray;
+  min-height: 100vh;
+  font-size: 2.0rem;
+  color: white;
+`;
 
-function actOnModalResult(arg) {
-    console.warn(`Modal result: ${arg}`);
-    if (arg){
-        setTimeout(() => alert('Delete action placeholder'), 0);
-    }
-}
+const StyledPane = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: left;
+  margin: 4rem;
+  width: 50%;
+`;
+
+const StyledHeader = styled.h2`
+    color: orange;
+`;
+
+const StyledAppButton = styled.button`
+  background-color: orange;
+  color: white;
+  border: solid 2px #9f7500;
+  border-radius: 8px;
+  width: 20rem;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  font-size: 1.6rem;
+`;
 
 function App() {
+    const [count, setCount] = useState(0);
     const [show, setShow] = useState(false);
-    const itemName = 'item one';
     const showModal = () => {
         setShow(true);
     };
 
+    const actOnModalResult = (arg) => {
+        console.warn(`Modal result: ${arg}`);
+        if (arg) {
+            setCount((prevCount) => prevCount + 1);
+        }
+    }
     const hideModal = (arg) => {
         setShow(false);
         actOnModalResult(arg);
@@ -28,20 +60,25 @@ function App() {
 
     return (
         <>
-            <div className="App">
-                <p><span style={{color: 'red', cursor: 'pointer'}}
-                         onClick={handleMainClick}>This is main panel stuff.</span>
-                    This is main panel stuff. This
-                    is main panel stuff. This is main panel stuff. This is
-                    main panel stuff. This is main panel stuff. This is main
-                    panel stuff. This is main panel stuff.</p>
-                <button type="button" onClick={showModal}>
-                    Open modal
-                </button>
-            </div>
-            <ConfirmationModal show={show} headerText="Confirm delete item?"
-                               handleClose={hideModal} openPos={Pos.CM_TOP_CENTER}>
-                {`Permanently delete "${itemName}"?`}
+            <StyledApp>
+                <StyledPane>
+                    <StyledHeader>An App</StyledHeader>
+                    <Counter labelText="Count" numericValue={count}/>
+                    <StyledAppButton type="button" onClick={showModal}>Increment counter</StyledAppButton>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </div>
+                </StyledPane>
+            </StyledApp>
+            <ConfirmationModal
+                show={show}
+                headerText="Confirmation"
+                handleClose={hideModal}
+                openPos={Pos.CM_CENTER_CENTER}>
+                {`Increment count "${count}"?`}
             </ConfirmationModal>
         </>
     );
