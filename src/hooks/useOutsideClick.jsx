@@ -5,7 +5,7 @@ const MOUSE_UP = 'mouseup';
 
 function useOutsideClick(handleClose, ref) {
     const handleClick = useCallback((event) => {
-        if (!ref.current?.contains(event.target)) {
+        if (ref && !ref?.current?.contains(event.target)) {
             handleClose();
         }
     },[ref, handleClose]);
@@ -21,6 +21,6 @@ function useOutsideClick(handleClose, ref) {
 
 useOutsideClick.propTyoes = {
     handleClose: PropTypes.func.isRequired,
-    ref: PropTypes.element,
+    ref: PropTypes.element.isRequired,
 }
 export default useOutsideClick;

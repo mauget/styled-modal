@@ -2,6 +2,7 @@ import { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 const KEY_NAME_ESC = 'Escape';
+const KEY_EVENT_TYPE = 'keyup';
 
 function useEscapeKey(handleClose) {
     const handleEscKey = useCallback((event) => {
@@ -11,11 +12,10 @@ function useEscapeKey(handleClose) {
     },[handleClose]);
 
     useEffect(() => {
-        const keyEvent = 'keyup';
-        document.addEventListener(keyEvent, handleEscKey, false);
+        document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
 
         return () => {
-            document.removeEventListener(keyEvent, handleEscKey, false);
+            document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
         };
     }, [handleEscKey]);
 }
