@@ -2,6 +2,7 @@ import styled from "styled-components";
 import PropTypes from 'prop-types';
 import React from "react";
 import {CM_CENTER_CENTER, CM_TOP_CENTER, CM_TOP_LEFT, CM_TOP_RIGHT} from "./index";
+import useKeyClose from "../hooks/useKeyClose";
 
 // These are private components
 
@@ -100,6 +101,7 @@ export default function ConfirmationModalImpl(props) {
     const sendYes = () => handleClose(true);
 
     const sendNo = () => handleClose(false);
+    useKeyClose(sendNo);
 
     return (
         <Model show={show}>
