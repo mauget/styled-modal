@@ -1,10 +1,9 @@
-import { useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 const KEY_NAME_ESC = 'Escape';
 
-function useKeyClose(handleClose) {
-
+function useEscapeKey(handleClose) {
     const handleEscKey = useCallback((event) => {
         if (event.key === KEY_NAME_ESC) {
             handleClose();
@@ -19,10 +18,9 @@ function useKeyClose(handleClose) {
             document.removeEventListener(keyEvent, handleEscKey, false);
         };
     }, [handleEscKey]);
-
 }
 
-useKeyClose.proptypes = {
+useEscapeKey.proptypes = {
     handleClose: PropTypes.func.isRequired,
 }
-export default useKeyClose;
+export default useEscapeKey;
