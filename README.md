@@ -1,6 +1,9 @@
 # A React Modal Using Styled Components
 This is a simple demo of a confirmation box implemented
 in Styled Components. No modal framework used.
+
+The modal uses custom React hooks, `useEscape` and `useOutsideClick` as an alternative
+modal close commands, that translate to same as clicing the "No" button in this modal.
 ---------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
