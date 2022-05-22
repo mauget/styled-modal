@@ -18,7 +18,7 @@ export default function Counter({ labelText, numericValue }) {
     return (
         <StyledCounter>
             <StyledLabel>{ labelText }</StyledLabel>
-            <StyledValue>{ numericValue }</StyledValue>
+            <StyledValue data-testid="value-field">{ numericValue }</StyledValue>
         </StyledCounter>
     );
 };

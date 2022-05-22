@@ -1,7 +1,9 @@
+import React, {useRef} from "react";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
-import React from "react";
 import {CM_CENTER_CENTER, CM_TOP_CENTER, CM_TOP_LEFT, CM_TOP_RIGHT} from "./index";
+import useEscapeKey from "../hooks/useEscapeKey";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 // These are private components
 
@@ -101,9 +103,14 @@ export default function ConfirmationModalImpl(props) {
 
     const sendNo = () => handleClose(false);
 
+    useEscapeKey(sendNo);
+
+    const ref = useRef(null);
+    useOutsideClick(sendNo, ref);
+
     return (
         <Model show={show}>
-            <Container openPos={openPos}>
+            <Container openPos={openPos} ref={ref}>
                 <Header>{headerText}</Header>
                 <HBar/>
                 <Slot>{detailText}</Slot>
@@ -122,6 +129,6 @@ ConfirmationModalImpl.propTypes = {
     detailText: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element
-    ]).isRequired,
+    ]),
     openPos: PropTypes.symbol.isRequired
 };
