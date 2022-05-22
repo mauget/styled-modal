@@ -5,14 +5,12 @@ import App from './App';
 describe('App.jsx', () => {
     it('renders the body text', () => {
         render(<App/>);
-        // eslint-disable-next-line no-restricted-globals
-        expect(screen.getByText('This is main panel stuff.')).toBeTruthy();
+        expect(screen.getByText(/An App/i)).toBeTruthy();
+        expect(screen.getByText(/lorem ipsum/i)).toBeTruthy();
     });
 
-
-    it('renders the Open modal button', () => {
+    it('renders the increment button', () => {
         render(<App/>);
-        // eslint-disable-next-line no-restricted-globals
-        expect(screen.getByRole('button')).toHaveTextContent('Open modal');
+        expect(screen.getByRole('button')).toHaveTextContent(/Increment counter/i);
     });
 })
