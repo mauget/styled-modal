@@ -23,7 +23,7 @@ const Model = styled.div`
 const Container = styled.div` 
     position:fixed;
     background: antiquewhite;
-    width: 33%;
+    width: 24rem;
     height: auto;
     
     top: ${({openPos}) => (
