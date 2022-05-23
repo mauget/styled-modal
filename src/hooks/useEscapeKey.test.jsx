@@ -74,4 +74,22 @@ describe('useEscapeKey', () => {
         expect(mockHandleClose).toHaveBeenCalledTimes(1);
     });
 
+    it('should NOT handle non-ESAC key', () => {
+        const escEvent = {
+            key: 'a',
+            bubbles: true,
+        };
+
+        render(<UseEscapeExample/>);
+        const inside = screen.getByText(/INSIDE area/i);
+
+        expect(inside).toBeTruthy();
+        expect(isDOMComponent(inside)).toBeTruthy();
+
+        expect(mockHandleClose).toHaveBeenCalledTimes(0);
+
+        fireEvent.keyUp(inside, escEvent);
+        expect(mockHandleClose).toHaveBeenCalledTimes(0);
+    });
+
 });
